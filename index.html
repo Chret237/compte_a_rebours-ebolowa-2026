@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta
-      name="description"
-      content="Compte à rebours programme jeunesse Ebolowa édition 2026"
+<meta name="description" content="Compte à rebours programme jeunesse édition Ebolowa 2026"
     />
 <link rel="icon" type="image/png" href="./icon.png">
 <title>Rencontre Jeunesse</title>
@@ -15,7 +13,7 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: 'Segoe UI', sans-serif;
+        font-family: fantasy;
     }
 
     body {
@@ -111,6 +109,163 @@
         color: #f4b400;
         font-weight: bold;
     }
+</style>
+
+</head>
+<body onclick="enableSound()">
+
+<header>
+    <h1>EBOLOWA</h1>
+    <h2>Rencontre Jeunesse</h2>
+    <div class="date">Du 10 au 12 Avril 2026</div>
+
+    <div class="countdown" id="countdown">Chargement...</div>
+    
+    <button id="soundToggle" onclick="toggleSound()" style="
+    margin-top:15px;
+    padding:10px 15px;
+    border:none;
+    border-radius:10px;
+    background:#f4b400;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+">
+🔊 Activer Son
+</button>
+</header>
+
+<!-- <section>
+    <h2>📅 Horaires</h2>
+    <div class="schedule">
+        <div class="card">
+            <h3>Vendredi 10</h3>
+            <p>09h00 - 15h00</p>
+            <p>17h00 - 20h00</p>
+        </div>
+
+        <div class="card">
+            <h3>Samedi 11</h3>
+            <p>09h00 - 15h00</p>
+            <p>17h00 - 20h00</p>
+        </div>
+
+        <div class="card">
+            <h3>Dimanche 12</h3>
+            <p>09h00 - 13h00</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>📖 Thèmes</h2>
+
+    <div class="themes">
+        <div class="theme highlight">L’enracinement : </div>
+        <div class="theme">La croissance spirituelle</div>
+        <div class="theme highlight">Le mariage :</div>
+        <div class="theme">Le choix du conjoint</div>
+        <div class="theme">La maturité selon le Seigneur</div>
+        <div class="theme">La sanctification</div>
+        <div class="theme">La consécration du disciple</div>
+        <div class="theme highlight">Les principes du royaume :</div>
+        <div class="theme">Entrepreneuriat chrétien</div>
+        <div class="theme">L’intimité</div>
+        <div class="theme">Le service selon le Seigneur</div>
+        <div class="theme">Le salut</div>
+        <div class="theme">Le renoncement à la chair</div>
+        <div class="theme">La conversion</div>
+    </div>
+</section>
+
+<section>
+    <h2>📍 Lieu</h2>
+    <p>Quartier Nko’ovos</p>
+    <p class="highlight">Maison du Parti</p>
+</section>
+
+<footer>
+    <h3>📞 Contacts</h3>
+    <div class="contacts">
+        653 11 66 24 / 675 72 81 42<br>
+        693 40 43 32 / 691 76 38 08
+    </div>
+</footer> -->
+
+<script>
+    const targetDate = new Date("April 10, 2026 09:00:00").getTime();
+
+    const tickSound = new Audio("tick.mp3");
+    const endSound = new Audio("end.mp3");
+
+    let soundEnabled = false;
+
+    function enableSound() {
+        soundEnabled = true;
+
+        // Débloque audio navigateur
+        tickSound.play().then(() => {
+            tickSound.pause();
+            tickSound.currentTime = 0;
+        });
+    }
+
+    function toggleSound() {
+        soundEnabled = !soundEnabled;
+
+        const btn = document.getElementById("soundToggle");
+        btn.innerText = soundEnabled ? "🔇 Désactiver Son" : "🔊 Activer Son";
+    }
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const gap = targetDate - now;
+
+        if (gap <= 0) {
+            document.getElementById("countdown").innerHTML = "🔥 L'événement a commencé !";
+
+            if (soundEnabled) {
+                endSound.play();
+            }
+
+            // 📳 vibration mobile
+            if (navigator.vibrate) {
+                navigator.vibrate([300, 100, 300, 100, 500]);
+            }
+
+            return;
+        }
+
+        const days = Math.floor(gap / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((gap / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((gap / (1000 * 60)) % 60);
+        const seconds = Math.floor((gap / 1000) % 60);
+
+        document.getElementById("countdown").innerHTML =
+            `${days} jours <br> ${hours.toString().padStart(2,'0')}h : ${minutes.toString().padStart(2,'0')}m : ${seconds.toString().padStart(2,'0')}s`;
+
+        // 🔊 tick chaque seconde
+        if (soundEnabled) {
+            tickSound.currentTime = 0;
+            tickSound.play().catch(() => {});
+        }
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+</script>
+
+<script>
+    function enableSound() {
+        tickSound.play().then(() => {
+            tickSound.pause();
+            tickSound.currentTime = 0;
+        });
+    }
+</script>
+
+</body>
+</html>    }
 </style>
 
 </head>
